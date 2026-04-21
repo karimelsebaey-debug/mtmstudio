@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const services = [
   {
@@ -34,16 +34,18 @@ const services = [
 ];
 
 export default function ServicesSection() {
+  const shouldReduce = useReducedMotion();
+
   return (
     <section id="services" className="py-24 md:py-32 bg-[#0a0a0a]">
       <div className="container mx-auto px-4 md:px-6">
         {/* Header */}
         <motion.div
           className="mb-16 md:mb-20"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={shouldReduce ? {} : { opacity: 0, y: 30 }}
+          whileInView={shouldReduce ? {} : { opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          transition={shouldReduce ? {} : { duration: 0.8 }}
         >
           <span className="mono text-xs uppercase tracking-widest text-[rgba(245,245,240,0.4)]">Services</span>
           <h2
@@ -67,10 +69,10 @@ export default function ServicesSection() {
               key={service.number}
               className="group relative border-t border-[rgba(245,245,240,0.06)] hover:border-[rgba(245,245,240,0.12)] p-8 md:p-10 transition-all duration-300 cursor-default"
               style={i % 2 === 0 ? { borderRight: "1px solid rgba(245,245,240,0.06)" } : {}}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={shouldReduce ? {} : { opacity: 0, y: 20 }}
+              whileInView={shouldReduce ? {} : { opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.08 }}
+              transition={shouldReduce ? {} : { duration: 0.6, delay: i * 0.08 }}
             >
               {/* Large ghost number */}
               <span

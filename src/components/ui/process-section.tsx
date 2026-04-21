@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const steps = [
   { num: "01", title: "Discovery", desc: "Goals, audience, constraints. Locked before we touch a pixel." },
@@ -8,11 +8,18 @@ const steps = [
 ];
 
 export function ProcessSection() {
+  const shouldReduce = useReducedMotion();
   return (
     <section id="process" className="py-24 md:py-32 bg-[#0a0a0a]">
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
-          <div className="md:sticky md:top-32 md:self-start">
+          <motion.div
+            className="md:sticky md:top-32 md:self-start"
+            initial={shouldReduce ? {} : { opacity: 0, y: 30 }}
+            whileInView={shouldReduce ? {} : { opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={shouldReduce ? {} : { duration: 0.8 }}
+          >
             <span className="mono text-xs uppercase tracking-widest text-[rgba(245,245,240,0.4)]">Process</span>
             <h2
               className="text-4xl md:text-5xl text-[#f5f5f0] mt-2 tracking-tight"
@@ -23,16 +30,16 @@ export function ProcessSection() {
             <p className="mt-4 text-lg text-[rgba(245,245,240,0.5)]">
               No jargon. No surprises. Clear phases, room to refine.
             </p>
-          </div>
+          </motion.div>
           <div className="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-0">
-            {steps.map((s) => (
+            {steps.map((s, i) => (
               <motion.div
                 key={s.num}
                 className="relative border-t border-[rgba(245,245,240,0.08)] pt-8 pb-12 px-4 group hover:border-[rgba(245,245,240,0.2)] transition-colors duration-300"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={shouldReduce ? {} : { opacity: 0, y: 30 }}
+                whileInView={shouldReduce ? {} : { opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
+                transition={shouldReduce ? {} : { duration: 0.7, delay: i * 0.15 }}
               >
                 <span
                   className="absolute top-4 right-4 text-7xl md:text-8xl font-bold text-[rgba(245,245,240,0.04)] select-none"

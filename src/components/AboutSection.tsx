@@ -1,17 +1,18 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const tags = ["Art direction", "Motion", "Product UI", "Analytics"];
 
 export default function AboutSection() {
+  const shouldReduce = useReducedMotion();
   return (
     <section id="about" className="py-24 md:py-32 bg-[#0a0a0a]">
       <div className="container mx-auto px-4 md:px-6">
         <motion.div
           className="max-w-3xl mx-auto text-center"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={shouldReduce ? {} : { opacity: 0, y: 40 }}
+          whileInView={shouldReduce ? {} : { opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          transition={shouldReduce ? {} : { duration: 1, ease: [0.22, 1, 0.36, 1] }}
         >
           <span className="mono text-xs uppercase tracking-widest text-[rgba(245,245,240,0.4)]">About</span>
           <h2
@@ -27,20 +28,20 @@ export default function AboutSection() {
 
           <motion.p
             className="mt-8 text-lg text-[rgba(245,245,240,0.55)] leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={shouldReduce ? {} : { opacity: 0, y: 20 }}
+            whileInView={shouldReduce ? {} : { opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={shouldReduce ? {} : { duration: 0.8, delay: 0.2 }}
           >
             MTMT is small, senior-led, obsessed with proportion, type, and timing. Every project is the start of a longer relationship. With your reputation. With ours.
           </motion.p>
 
           <motion.p
             className="mt-4 text-lg text-[rgba(245,245,240,0.4)] leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={shouldReduce ? {} : { opacity: 0, y: 20 }}
+            whileInView={shouldReduce ? {} : { opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            transition={shouldReduce ? {} : { duration: 0.8, delay: 0.3 }}
           >
             From identity systems to motion and data. We work close with founders and creative leads who care about clarity as much as craft.
           </motion.p>
@@ -48,10 +49,10 @@ export default function AboutSection() {
           {/* Tags */}
           <motion.div
             className="mt-10 flex flex-wrap items-center justify-center gap-3"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={shouldReduce ? {} : { opacity: 0 }}
+            whileInView={shouldReduce ? {} : { opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={shouldReduce ? {} : { duration: 0.8, delay: 0.4 }}
           >
             {tags.map((tag, i) => (
               <span key={tag} className="flex items-center gap-3">
