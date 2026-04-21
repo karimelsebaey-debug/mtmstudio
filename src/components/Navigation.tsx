@@ -1,12 +1,18 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+} from "@/components/ui/navigation-menu";
 
 const links = [
   { label: "Services", href: "#services" },
-  { label: "Work", href: "#work" },
-  { label: "Process", href: "#process" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#contact" },
+  { label: "Work",     href: "#work" },
+  { label: "Process",  href: "#process" },
+  { label: "About",    href: "#about" },
+  { label: "Contact",  href: "#contact" },
 ];
 
 export default function Navigation() {
@@ -19,7 +25,6 @@ export default function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
@@ -47,20 +52,25 @@ export default function Navigation() {
             className="text-[#f5f5f0] text-xl font-bold tracking-tight"
             style={{ fontFamily: "Playfair Display, serif" }}
           >
-            MTMT
+            MTM
           </a>
 
-          {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-8">
-            {links.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="mono text-xs uppercase tracking-widest text-[rgba(245,245,240,0.6)] hover:text-[#f5f5f0] transition-colors duration-200"
-              >
-                {link.label}
-              </a>
-            ))}
+          {/* Desktop links — NavigationMenu primitives for accessibility */}
+          <div className="hidden md:flex items-center">
+            <NavigationMenu>
+              <NavigationMenuList className="gap-6">
+                {links.map((link) => (
+                  <NavigationMenuItem key={link.label}>
+                    <NavigationMenuLink
+                      href={link.href}
+                      className="mono text-xs font-bold uppercase tracking-widest text-[rgba(245,245,240,0.6)] hover:text-[#f5f5f0] transition-colors duration-200 bg-transparent hover:bg-transparent focus:bg-transparent"
+                    >
+                      {link.label}
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+                ))}
+              </NavigationMenuList>
+            </NavigationMenu>
           </div>
 
           {/* Mobile hamburger */}
@@ -103,7 +113,7 @@ export default function Navigation() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.07 }}
                 onClick={handleLinkClick}
-                className="mono text-sm uppercase tracking-[0.3em] text-[rgba(245,245,240,0.7)] hover:text-[#f5f5f0] transition-colors"
+                className="mono text-sm font-bold uppercase tracking-[0.3em] text-[rgba(245,245,240,0.7)] hover:text-[#f5f5f0] transition-colors"
               >
                 {link.label}
               </motion.a>

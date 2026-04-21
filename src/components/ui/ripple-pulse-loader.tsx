@@ -30,10 +30,13 @@ export function RipplePulseLoader({ onComplete }: { onComplete?: () => void }) {
               />
             ))}
             <span
-              className="relative text-[#f5f5f0] text-2xl font-bold tracking-tight"
-              style={{ fontFamily: "Playfair Display, serif" }}
+              className="relative text-[#f5f5f0] font-bold tracking-widest"
+              style={{
+                fontFamily: "Playfair Display, serif",
+                fontSize: "clamp(3.5rem, 8vw, 7rem)",
+              }}
             >
-              MTMT
+              MTM
             </span>
           </div>
         </motion.div>

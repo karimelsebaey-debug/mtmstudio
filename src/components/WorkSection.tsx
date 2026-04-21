@@ -3,14 +3,14 @@ import { ProjectCard } from "@/components/ui/project-card";
 import { Marquee } from "@/components/ui/marquee";
 
 const projects = [
-  { category: "Identity", title: "Brand Identity" },
-  { category: "Design", title: "Logo Design" },
-  { category: "Data", title: "Dashboard" },
-  { category: "Systems", title: "Identity Architecture" },
-  { category: "Intelligence", title: "Decision Framework" },
-  { category: "Narrative", title: "Presentation" },
-  { category: "Motion", title: "Logo Animations" },
-  { category: "Character", title: "Character Animations" },
+  { category: "Identity",    title: "Brand Identity",           href: "https://cool-sky-506.linkyhost.com" },
+  { category: "Design",      title: "Logo Design",              href: "https://falling-dawn-316.linkyhost.com" },
+  { category: "Data",        title: "Dashboard",                href: "https://shy-bird-898.linkyhost.com" },
+  { category: "Systems",     title: "Identity Architecture",    href: "https://falling-dawn-316.linkyhost.com" },
+  { category: "AI Marketing",title: "AI Avatar Ad",             href: "https://vimeo.com/1185121765?fl=tl&fe=ec" },
+  { category: "Platforms",   title: "Digital Platforms & CRM",  href: "https://late-hill-554.linkyhost.com" },
+  { category: "Motion",      title: "Logo Animations",          href: "https://vimeo.com/1185121834?fl=tl&fe=ec" },
+  { category: "Motion",      title: "video editing",            href: "https://vimeo.com/1185129547?fl=tl&fe=ec" },
 ];
 
 export default function WorkSection() {
@@ -47,6 +47,7 @@ export default function WorkSection() {
               key={project.title}
               category={project.category}
               title={project.title}
+              href={project.href}
               style={{ transitionDelay: `${i * 0.05}s` }}
             />
           ))}
