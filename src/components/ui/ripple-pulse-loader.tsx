@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Loader from "@/components/ui/3d-box-loader-animation";
 
 export function RipplePulseLoader({ onComplete }: { onComplete?: () => void }) {
   const [visible, setVisible] = useState(true);
+
   useEffect(() => {
+    // 2500ms — lets users see the full box assembly sequence
+    // (boxes appear 0–1.8s, rest on platform at ~1.8–2.4s, start falling at 2.4s)
     const t = setTimeout(() => {
       setVisible(false);
       onComplete?.();
-    }, 1500);
+    }, 2500);
     return () => clearTimeout(t);
   }, [onComplete]);
 
@@ -19,18 +23,15 @@ export function RipplePulseLoader({ onComplete }: { onComplete?: () => void }) {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="relative flex items-center justify-center">
-            {[0, 1, 2, 3, 4].map((i) => (
-              <motion.div
-                key={i}
-                className="absolute rounded-full border border-[rgba(245,245,240,0.15)]"
-                initial={{ width: 60, height: 60, opacity: 0.6 }}
-                animate={{ width: 200 + i * 60, height: 200 + i * 60, opacity: 0 }}
-                transition={{ duration: 2, repeat: Infinity, delay: i * 0.3, ease: "easeOut" }}
-              />
-            ))}
+          {/*
+            Flex column keeps MTM text strictly ABOVE the 3D animation container.
+            The text occupies ~100px; with gap-6 (24px) the boxes start ~124px below.
+            No geometric overlap is possible — the 3D transform is scoped to the
+            200×320px .loader div which is below the text in document flow.
+          */}
+          <div className="flex flex-col items-center justify-center gap-6">
             <span
-              className="relative text-[#f5f5f0] font-bold tracking-widest"
+              className="text-[#f5f5f0] font-bold tracking-widest"
               style={{
                 fontFamily: "Playfair Display, serif",
                 fontSize: "clamp(3.5rem, 8vw, 7rem)",
@@ -38,6 +39,7 @@ export function RipplePulseLoader({ onComplete }: { onComplete?: () => void }) {
             >
               MTM
             </span>
+            <Loader />
           </div>
         </motion.div>
       )}
